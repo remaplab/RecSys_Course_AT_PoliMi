@@ -1,0 +1,30 @@
+[project]
+name = "recsys-competition"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.10.*"
+dependencies = [
+    "cython==0.29.23",
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.5",
+    "loguru>=0.7.3",
+    "matplotlib>=3.9.2",
+    "nltk>=3.9.1",
+    "numpy<2",
+    "optuna>=4.1.0",
+    "pandas<2",
+    "plotly>=5.24.1",
+    "polars[pandas,pyarrow]>=1.18.0",
+    "py-spy>=0.4.0",
+    "pyarrow>=18.1.0",
+    "scikit-learn>=1.5.2",
+    "scikit-optimize>=0.10.2",
+    "scipy>=1.14.1",
+    "seaborn>=0.13.2",
+    "setuptools>=75.5.0",
+    "tables>=3.10.1",
+    "torch<2",
+    "tqdm>=4.67.0",
+    "xgboost-cpu>=2.1.3",
+]
