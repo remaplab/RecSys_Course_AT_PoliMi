@@ -482,7 +482,14 @@ cdef class Compute_Similarity_Cython:
                     this_item_weights_np[inner_item_index] = - self.this_item_weights[item_id]
 
                 # Sort indices and select topK, partition the data to extract the set of relevant items
-                relevant_items_partition = np.argpartition(this_item_weights_np, self.topK - 1, axis=0)[0:self.topK]
+                # Only the first this_item_weights_counter positions refer to the current item. Positions beyond it
+                # contain stale ids left over from previous items: selecting them would add duplicate (summed) entries
+                local_topK = min(self.topK, self.this_item_weights_counter)
+
+                if local_topK > 0:
+                    relevant_items_partition = np.argpartition(this_item_weights_np[0:self.this_item_weights_counter], local_topK - 1, axis=0)[0:local_topK]
+                else:
+                    relevant_items_partition = np.zeros(0, dtype=np.int64)
 
                 # Incrementally build sparse matrix, do not add zeros
                 for inner_item_index in range(len(relevant_items_partition)):
